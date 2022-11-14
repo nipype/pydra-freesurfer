@@ -1,0 +1,31 @@
+ReconAll:
+  output_requirements:
+    out_file: T1_files
+    out_subjects_dir: subjects_dir
+    out_subject_id: subject_id
+  output_templates:
+    subjects_dir: "{subjects_dir}_ReconAll"
+  doctest:
+    T1_files: "test.nii.gz"
+    subjects_dir: "."
+    subject_id: "foo"
+    cmdline: "recon-all -all -i structural.nii -qcache -subjid foo -sd ."
+
+  tests_inputs: []
+  tests_outputs: []
+
+ApplyVolTransform:
+  output_requirements:
+    out_file: source_file
+    out_reg_file: reg_file
+  output_templates:
+    transformed_file: "{source_file}_warped"
+  doctest:
+    source_file: "./tests/structural.nii.gz"
+    reg_file: "register.dat"
+    transformed_file: "./tests/struct_warped.nii"
+    target_file: "./tests/structural.nii.gz"
+    tal: False
+    cmdline: "mri_vol2vol --fstarg --reg register.dat --mov structural.nii --o struct_warped.nii"
+  tests_inputs: []
+  tests_outputs: []
